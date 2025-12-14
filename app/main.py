@@ -39,7 +39,7 @@ class Number(Validator):
 class OneOf(Validator):
     def __init__(self, options: Tuple[str, ...]) -> None:
         self.options: Set[str] = set(options)
-        self.options_str: str = str(options)  # Используем исходный кортеж для форматирования
+        self.options_str: str = str(options)
 
     def validate(self, value: Any) -> None:
         if value not in self.options:
@@ -56,7 +56,9 @@ class BurgerRecipe:
     eggs: Number = Number(min_value=0, max_value=2)
     sauce: OneOf = OneOf(options=("ketchup", "mayo", "burger"))
 
-    def __init__(self, buns: int, cheese: int, tomatoes: int, cutlets: int, eggs: int, sauce: str) -> None:
+    def __init__(self, buns: int, cheese: int,
+                 tomatoes: int, cutlets: int,
+                 eggs: int, sauce: str) -> None:
         self.buns = buns
         self.cheese = cheese
         self.tomatoes = tomatoes
