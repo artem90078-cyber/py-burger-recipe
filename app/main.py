@@ -37,14 +37,11 @@ class Number(Validator):
 
 class OneOf(Validator):
     def __init__(self, options):
-        # Store as set for efficient lookup
         self.options = set(options)
-        # Store a string representation of the options as a tuple for deterministic error messages
         self.options_str = str(tuple(options))
 
     def validate(self, value):
         if value not in self.options:
-            # Use self.options_str here to produce the required format ('ketchup', 'mayo', 'burger').
             raise ValueError(
                 f"Expected {value} to be one of {self.options_str}."
             )
