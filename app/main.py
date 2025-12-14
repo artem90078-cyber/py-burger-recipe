@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, Set
+from typing import Any, Tuple
 
 
 class Validator(ABC):
@@ -38,13 +38,12 @@ class Number(Validator):
 
 class OneOf(Validator):
     def __init__(self, options: Tuple[str, ...]) -> None:
-        self.options: Set[str] = set(options)
-        self.options_str: str = str(options)
+        self.options: Tuple[str, ...] = options
 
     def validate(self, value: Any) -> None:
         if value not in self.options:
             raise ValueError(
-                f"Expected {value} to be one of {self.options_str}."
+                f"Expected {value} to be one of {self.options}."
             )
 
 
